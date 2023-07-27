@@ -13,7 +13,7 @@ dataframe = openpyxl.load_workbook('postalCodeordered.xlsx')
 dataframe1 = dataframe.active
 
 # Iterate the loop to read the cell values
-postalCodeDb = []
+postalCodeDb = {}
 for row in range(0, dataframe1.max_row):
     postalCodeDict = dict()
     postalCoedSet = []
@@ -25,11 +25,16 @@ for row in range(0, dataframe1.max_row):
         postalCodeDict["district"] = postalCoedSet[1]
         postalCodeDict["postalCode"] = postalCoedSet[2]
 
-    postalCodeDb.append(postalCodeDict)
+    postalCodeDb[postalCoedSet[2]] = postalCodeDict
 
     # print(len(postalCodeDict))
 
 
-jsonDumpDb = json.dumps(postalCodeDb)
+jsonDumpDb = postalCodeDb
+
+
+with open('postalCodeDB.json', 'w') as f:
+    json.dump(jsonDumpDb, f)
+
 
 print(jsonDumpDb)

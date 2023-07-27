@@ -1,0 +1,1 @@
+with open('postalCodeDB.json', 'r', encoding='utf-8') as f:
